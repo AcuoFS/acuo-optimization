@@ -74,6 +74,7 @@ portOpti <- function(accounts,tradesNum){
       cat('Move trade(s) from account [', k, '] to account [', accountsIdx[k],'].','\n')
     }
   }
+  result <- list(accounts=accounts,tradesNum=tradesNum,accountsIdx=accountsIdx)
 }
 
 
