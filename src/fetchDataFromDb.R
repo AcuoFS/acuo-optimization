@@ -4,7 +4,7 @@ library('RNeo4j')
 neo4jDevUrl <- "http://dev.acuo.com:7474/db/data"
 neo4jLocalUrl = "http://localhost:7474/db/data/"
 
-portfolioInfoByPortfolioIdCypherPath <- "https://raw.githubusercontent.com/AcuoFS/acuo-optimization/develop/src/Cypher/portfolioInfo.cql"
+portfolioInfoByPortfolioIdCypherPath <- "https://raw.githubusercontent.com/AcuoFS/acuo-optimization/master/src/Cypher/portfolioInfo.cql"
 
 executeCypher <- function(path,...){
   params <- list(...)
