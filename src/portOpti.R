@@ -1,9 +1,9 @@
 
-portOpti <- function(DV01,tradesNum,portfoliosId){
+portOpti <- function(DV01,tradesNum,portfolioIds){
   # DV01: DV01 of each account, initially 1 trade in each portfolio(account)
   # N: number of DV01
   # tradesNum: number of trades in each portfolio(account)
-  # portfoliosId: portfolio Id for trades
+  # portfolioIds: portfolio Id for trades
   # DV01Idx: portfolio index for trades
   # movements: record the movements number of the trades
   
@@ -64,7 +64,7 @@ portOpti <- function(DV01,tradesNum,portfoliosId){
     }
     DV01 <- DV01Pos+DV01Neg
   }
-  portfoliosId <- portfoliosId[DV01Idx]
+  portfolioIds <- portfolioIds[DV01Idx]
   
   #cat("DV01 of each account:",DV01,'\n')
   #cat("Number of trades in each account",tradesNum,'\n')
@@ -74,10 +74,10 @@ portOpti <- function(DV01,tradesNum,portfoliosId){
   # instructions
   for(k in 1:N){
     if(DV01Idx[k]!=k){
-      #cat('Move trade(s) from portfolio [', k, '] to portfolio [', portfoliosId[k],'].','\n')
+      #cat('Move trade(s) from portfolio [', k, '] to portfolio [', portfolioIds[k],'].','\n')
     }
   }
-  result <- list(DV01=DV01,tradesNum=tradesNum,portfoliosId=portfoliosId,movements=movements)
+  result <- list(DV01=DV01,tradesNum=tradesNum,portfolioIds=portfolioIds,movements=movements)
 }
 
 
