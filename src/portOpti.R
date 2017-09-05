@@ -1,5 +1,15 @@
+portOpti <- function(IOAll){
+  for(i in 1:length(IOAll)){
+    input <- IOAll[[i]]$input
+    tradeNum <- input$tradeNum
+    DV01 <- input$DV01
+    portfolioIds <- input$portfolioIds
+    IOAll[[i]]$output <- portOptiCore(DV01,tradeNum,portfolioIds)
+  }
+  return(IOAll)
+}
 
-portOpti <- function(DV01,tradesNum,portfolioIds){
+portOptiCore <- function(DV01,tradesNum,portfolioIds){
   # DV01: DV01 of each account, initially 1 trade in each portfolio(account)
   # N: number of DV01
   # tradesNum: number of trades in each portfolio(account)

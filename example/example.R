@@ -1,5 +1,26 @@
 
+setwd('E:/ACUO/projects/acuo-optimization/')
+
 source('src/portOpti.R')
-accounts <- c(80,-50,-20,40,70,-70,50,-70)
-tradesNum <- c(1,2,4,1,3,1,2,1)
-result <- portOpti(accounts,tradesNum)
+source('src/inputConstruct.R')
+source('src/generalFunctions.R')
+source('src/fetchDataFromDb.R')
+
+
+#### PORTFOLIO INPUT FROM JAVA ###############
+portfolioIds <- c('p31','p32','p33')
+portfolio <- portfolioInfo(portfolioIds)
+
+# generate randome numbers between -10,000 and +10,000 as DV01
+portfolio$DV01 <- sample(-100:100,length(portfolio[,1]),replace = TRUE)*100
+portfolio$tradeNum <- rep(1,length(portfolio[,1]))
+#### PORTFOLIO INPUT FROM JAVA END ############
+
+#### INPUT AND OUTPUT ###########
+IOAll <- inputConstruct(portfolio)
+
+IOAll <- portOpti(IOAll)
+#### INPUT AND OUTPUT END ########
+
+# Instructions for each category 
+printInstructions(c(4,8))
