@@ -1,4 +1,6 @@
 source('src/portOpti.R')
+source('src/inputConstruct.R')
+source('src/fetchDataFromDb.R')
 
 # example 1
 portfolioIds1 <- c('p31','p32','p33','p34','p35','p36','p37','p38','p39','p40')
