@@ -8,7 +8,7 @@ source('src/fetchDataFromDb.R')
 
 
 #### PORTFOLIO INPUT FROM JAVA ###############
-portfolioIds <- c('p31','p32','p33')
+portfolioIds <- c('p31','p32','p33','p34','p35','p36','p37','p38','p39','p40')
 portfolio <- portfolioInfo(portfolioIds)
 
 # generate randome numbers between -10,000 and +10,000 as DV01
@@ -23,4 +23,4 @@ IOAll <- portOpti(IOAll)
 #### INPUT AND OUTPUT END ########
 
 # Instructions for each category 
-printInstructions(c(4,8))
+printInstructions(c(1:18))

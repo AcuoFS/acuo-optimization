@@ -11,7 +11,7 @@ printInstructions <- function(idx){
     cat("Total movements:",output$movements,'\n')
     for(k in 1:length(input$portfolioIds)){
       if(output$portfolioIds[k]!=input$portfolioIds[k]){
-        tradeIds <- paste(input$tradeIds[[portfolioIds[k]]],collapse=',')
+        tradeIds <- paste(input$tradeIds[[output$portfolioIds[k]]],collapse=',')
         cat('Move trade(s) from portfolio [', input$portfolioIds[k],'(',tradeIds, ')] to portfolio [', output$portfolioIds[k],'].','\n')
       } 
     }

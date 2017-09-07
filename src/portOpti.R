@@ -48,8 +48,8 @@ portOptiCore <- function(DV01,tradesNum,portfolioIds){
       DV01Pos[maxIdxPos] <- 0
       DV01Neg[maxIdxNeg] <- maxPos + maxNeg
       movements <- movements + tradesNum[maxIdxPos]
-      tradesNum[maxIdxPos] <- 0
       tradesNum[maxIdxNeg] <- tradesNum[maxIdxNeg]+tradesNum[maxIdxPos]
+      tradesNum[maxIdxPos] <- 0
       DV01Idx[maxIdxPos] <- maxIdxNeg
       
       
@@ -66,8 +66,8 @@ portOptiCore <- function(DV01,tradesNum,portfolioIds){
         DV01Pos[maxIdxPos] <- 0
         DV01Neg[maxIdxNeg] <- maxPos + maxNeg
         movements <- movements + tradesNum[maxIdxPos]
-        tradesNum[maxIdxPos] <- 0
         tradesNum[maxIdxNeg] <- tradesNum[maxIdxNeg]+tradesNum[maxIdxPos]
+        tradesNum[maxIdxPos] <- 0
         DV01Idx[maxIdxPos] <- maxIdxNeg
         
       }
