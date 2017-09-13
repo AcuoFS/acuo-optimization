@@ -6,7 +6,7 @@ neo4jLocalUrl = "http://localhost:7474/db/data/"
 
 portfolioInfoByPortfolioIdCypherPath <- "https://raw.githubusercontent.com/AcuoFS/acuo-optimization/master/src/Cypher/portfolioInfo.cql"
 
-executeCypher <- function(path,...){
+ExecuteCypher <- function(path,...){
   params <- list(...)
   query = paste(readLines(path), collapse="\n")
   #graph = startGraph(neo4jUrl)
@@ -15,7 +15,7 @@ executeCypher <- function(path,...){
   cypher(graph,query,params)
 }
 
-portfolioInfo <- function(portfolioIds){
+PortfolioInfo <- function(portfolioIds){
   portfolioIds <- c(portfolioIds,'nonexist')
-  executeCypher(path=portfolioInfoByPortfolioIdCypherPath,portfolioIds=portfolioIds)
+  ExecuteCypher(path=portfolioInfoByPortfolioIdCypherPath,portfolioIds=portfolioIds)
 }

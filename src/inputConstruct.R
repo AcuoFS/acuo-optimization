@@ -1,6 +1,6 @@
 
 #### INPUT CONSTRUCT FUNCTION #######
-inputConstruct <- function(portfolio){
+InputConstruct <- function(portfolio){
   P <- portfolio
   
   all <- list()
@@ -14,9 +14,15 @@ inputConstruct <- function(portfolio){
   aggregation <- aggregate(cbind(P$DV01,P$tradeNum),by = list(P$currency,P$tradeType,P$portfolioId),FUN='sum')
   colnames(aggregation) <- c('currency','tradeType','portfolio','DV01','tradeNum')
   
-  aggregateTrades <- aggregate(P$tradeId,by = list(P$currency,P$tradeType,P$portfolioId),FUN='paste')
-  colnames(aggregateTrades) <- c('currency','tradeType','portfolio','tradeIds')
+  aggregateTrades <- aggregate(cbind(P$tradeId,P$DV01),by = list(P$currency,P$tradeType,P$portfolioId),FUN='paste')
+  colnames(aggregateTrades) <- c('currency','tradeType','portfolio','tradeIds','DV01s')
   names(aggregateTrades$tradeIds) <- aggregateTrades$portfolio
+  names(aggregateTrades$DV01s) <- aggregateTrades$portfolio
+  # convert the DV01s to numeric
+  for(k in 1:length(aggregateTrades$tradeIds)){
+    aggregateTrades$DV01s[[k]] <- as.numeric(aggregateTrades$DV01s[[k]])
+  }
+  
   
   for(i in 1:length(types$currency)){
     currency <- types$currency[i]
@@ -29,11 +35,14 @@ inputConstruct <- function(portfolio){
     
     idxTrades <- which(aggregateTrades$currency==currency & aggregateTrades$tradeType==tradeType)
     tradeIds <- aggregateTrades$tradeIds[idxTrades]
+    tradeDV01s <- aggregateTrades$DV01s[idxTrades]
     
     all[[i]] <- list()
     all[[i]]$category <- list(currency=currency,tradeType=tradeType)
-    all[[i]]$input <- list(portfolioIds=tempPortfolioIds,tradeNum=tempTradeNum,DV01=tempDV01,tradeIds=tradeIds)
+    all[[i]]$input <- list(portfolioIds=tempPortfolioIds,tradeNum=tempTradeNum,DV01=tempDV01,
+                           tradeIds=tradeIds,tradeDV01s=tradeDV01s)
   }
+  
   return(all)
 }
 
