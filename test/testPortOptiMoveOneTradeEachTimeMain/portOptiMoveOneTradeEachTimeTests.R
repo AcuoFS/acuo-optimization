@@ -1,4 +1,4 @@
-source('src/portOpti_moveEntirePort.R')
+source('src/portOpti.R')
 source('src/inputConstruct.R')
 source('src/fetchDataFromDb.R')
 
@@ -22,17 +22,17 @@ testPortOptiWithMultiCurrencyAndTradeType <- function(){
   IOAll <- IOAll1
   IOAll <- PortOpti(IOAll)
   
-  result <- IOAll[[1]]$output
+  result <- IOAll[[2]]$output
   
-  checkEquals(result$DV01,c(0,27176,56664))
-  checkEquals(result$tradeNum,c(0,27,13))
-  checkEquals(result$portfolioIds,c('p32','p32','p33'))
-  checkEquals(result$movements,14)
+  checkEquals(result$DV01,c(0,23392,22612))
+  checkEquals(result$tradeNum,c(0,11,9))
+  checkEquals(result$portfolioIds,c('p31','p32','p33'))
+  checkEquals(result$movements,6)
   
   result <- IOAll[[12]]$output
   
   checkEquals(result$DV01,c(0,1352,21595,33914,79085,212943))
   checkEquals(result$tradeNum,c(0,15,15,7,7,20))
-  checkEquals(result$portfolioIds,c( "p40","p35","p36","p37","p38","p40"))
+  checkEquals(result$portfolioIds,c( "p34","p35","p36","p37","p38","p40"))
   checkEquals(result$movements,6)
 }

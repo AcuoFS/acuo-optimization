@@ -9,10 +9,10 @@ PortOpti <- function(IOAll){
   return(IOAll)
 }
 
-OptiMoveEntirePort <- function(DV01,tradesNum,portfolioIds){
+OptiMoveEntirePort <- function(DV01,tradeNum,portfolioIds){
   # DV01: DV01 of each account, initially 1 trade in each portfolio(account)
   # N: number of DV01
-  # tradesNum: number of trades in each portfolio(account)
+  # tradeNum: number of trades in each portfolio(account)
   # portfolioIds: portfolio Id for trades
   # DV01Idx: portfolio index for trades
   # movements: record the movements number of the trades
@@ -38,36 +38,36 @@ OptiMoveEntirePort <- function(DV01,tradesNum,portfolioIds){
     if(maxPos > abs(maxNeg)){
       DV01Pos[maxIdxPos] <- maxPos + maxNeg
       DV01Neg[maxIdxNeg] <- 0
-      movements <- movements + tradesNum[maxIdxNeg]
-      tradesNum[maxIdxPos] <- tradesNum[maxIdxPos]+tradesNum[maxIdxNeg]
-      tradesNum[maxIdxNeg] <- 0
+      movements <- movements + tradeNum[maxIdxNeg]
+      tradeNum[maxIdxPos] <- tradeNum[maxIdxPos]+tradeNum[maxIdxNeg]
+      tradeNum[maxIdxNeg] <- 0
       DV01Idx[maxIdxNeg] <- maxIdxPos
       
       
     } else if(maxPos < abs(maxNeg)){
       DV01Pos[maxIdxPos] <- 0
       DV01Neg[maxIdxNeg] <- maxPos + maxNeg
-      movements <- movements + tradesNum[maxIdxPos]
-      tradesNum[maxIdxNeg] <- tradesNum[maxIdxNeg]+tradesNum[maxIdxPos]
-      tradesNum[maxIdxPos] <- 0
+      movements <- movements + tradeNum[maxIdxPos]
+      tradeNum[maxIdxNeg] <- tradeNum[maxIdxNeg]+tradeNum[maxIdxPos]
+      tradeNum[maxIdxPos] <- 0
       DV01Idx[maxIdxPos] <- maxIdxNeg
       
       
     } else{
-      if(tradesNum[maxIdxPos] > tradesNum[maxIdxNeg]){
+      if(tradeNum[maxIdxPos] > tradeNum[maxIdxNeg]){
         DV01Pos[maxIdxPos] <- maxPos + maxNeg
         DV01Neg[maxIdxNeg] <- 0
-        movements <- movements + tradesNum[maxIdxNeg]
-        tradesNum[maxIdxPos] <- tradesNum[maxIdxPos]+tradesNum[maxIdxNeg]
-        tradesNum[maxIdxNeg] <- 0
+        movements <- movements + tradeNum[maxIdxNeg]
+        tradeNum[maxIdxPos] <- tradeNum[maxIdxPos]+tradeNum[maxIdxNeg]
+        tradeNum[maxIdxNeg] <- 0
         DV01Idx[maxIdxNeg] <- maxIdxPos
         
       } else{
         DV01Pos[maxIdxPos] <- 0
         DV01Neg[maxIdxNeg] <- maxPos + maxNeg
-        movements <- movements + tradesNum[maxIdxPos]
-        tradesNum[maxIdxNeg] <- tradesNum[maxIdxNeg]+tradesNum[maxIdxPos]
-        tradesNum[maxIdxPos] <- 0
+        movements <- movements + tradeNum[maxIdxPos]
+        tradeNum[maxIdxNeg] <- tradeNum[maxIdxNeg]+tradeNum[maxIdxPos]
+        tradeNum[maxIdxPos] <- 0
         DV01Idx[maxIdxPos] <- maxIdxNeg
         
       }
@@ -77,7 +77,7 @@ OptiMoveEntirePort <- function(DV01,tradesNum,portfolioIds){
   portfolioIds <- portfolioIds[DV01Idx]
   
   #cat("DV01 of each account:",DV01,'\n')
-  #cat("Number of trades in each account",tradesNum,'\n')
+  #cat("Number of trades in each account",tradeNum,'\n')
   #cat("Original account of each trade",DV01Idx,'\n')
   #cat("Total movements:",movements,'\n')
   
@@ -87,6 +87,6 @@ OptiMoveEntirePort <- function(DV01,tradesNum,portfolioIds){
       #cat('Move trade(s) from portfolio [', k, '] to portfolio [', portfolioIds[k],'].','\n')
     }
   }
-  result <- list(DV01=DV01,tradesNum=tradesNum,portfolioIds=portfolioIds,movements=movements)
+  result <- list(DV01=DV01,tradeNum=tradeNum,portfolioIds=portfolioIds,movements=movements)
 }
 
